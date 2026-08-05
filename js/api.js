@@ -67,5 +67,5 @@ async function getMoviesByGenre(genreId, page = 1) {
 
 /** Construye la URL completa de un póster */
 function getPosterUrl(posterPath) {
-  return posterPath ? `${TMDB_IMG_BASE}${posterPath}` : "../img/poster-placeholder.png";
+  return posterPath ? `${TMDB_IMG_BASE}${posterPath}` : "https://placehold.co/500x750/1B2540/B8C1D1?text=Sin+imagen";
 }
