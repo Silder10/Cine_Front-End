@@ -1,0 +1,226 @@
+/* ==========================================================================
+   UltraVision — Hoja de estilos base
+   Paleta: Azul oscuro / Azul brillante / Gris claro / Negro / Blanco
+   ========================================================================== */
+
+:root {
+  /* Colores */
+  --uv-bg: #0B1120;
+  --uv-bg-alt: #141C30;
+  --uv-bg-card: #1B2540;
+  --uv-blue: #2F6FED;
+  --uv-blue-glow: #5B8CFF;
+  --uv-gray: #B8C1D1;
+  --uv-black: #0A0A0A;
+  --uv-white: #FFFFFF;
+
+  /* Tipografía */
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Espaciados */
+  --uv-radius: 14px;
+  --uv-transition: 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--uv-bg);
+  color: var(--uv-white);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, .brand {
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--uv-blue-glow);
+}
+
+/* ---------- Navbar ---------- */
+.navbar-uv {
+  background-color: var(--uv-black);
+  border-bottom: 1px solid rgba(91, 140, 255, 0.15);
+}
+
+.navbar-uv .brand {
+  color: var(--uv-white);
+  font-size: 1.4rem;
+}
+
+.navbar-uv .brand span {
+  color: var(--uv-blue-glow);
+}
+
+.navbar-uv .nav-link {
+  color: var(--uv-gray) !important;
+  transition: color var(--uv-transition);
+}
+
+.navbar-uv .nav-link:hover,
+.navbar-uv .nav-link.active {
+  color: var(--uv-blue-glow) !important;
+}
+
+/* ---------- Hero (elemento distintivo: haz de proyector) ---------- */
+.hero-uv {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(47, 111, 237, 0.35), transparent 70%),
+              linear-gradient(180deg, var(--uv-bg) 0%, var(--uv-bg-alt) 100%);
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.hero-uv::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 2px;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(91, 140, 255, 0.8), transparent);
+  transform: translateX(-50%) rotate(0deg);
+  filter: blur(1px);
+  animation: uv-beam-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes uv-beam-sweep {
+  0%, 100% { transform: translateX(-50%) rotate(-12deg); opacity: 0.5; }
+  50% { transform: translateX(-50%) rotate(12deg); opacity: 0.9; }
+}
+
+.hero-uv .eyebrow {
+  color: var(--uv-blue-glow);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hero-uv h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  margin: 0.5rem 0 1rem;
+}
+
+.hero-uv p {
+  color: var(--uv-gray);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* ---------- Botones ---------- */
+.btn-uv-primary {
+  background-color: var(--uv-blue);
+  color: var(--uv-white);
+  border: none;
+  border-radius: var(--uv-radius);
+  padding: 0.7rem 1.8rem;
+  font-weight: 600;
+  transition: background-color var(--uv-transition), transform var(--uv-transition);
+}
+
+.btn-uv-primary:hover {
+  background-color: var(--uv-blue-glow);
+  color: var(--uv-white);
+  transform: translateY(-2px);
+}
+
+.btn-uv-outline {
+  background-color: transparent;
+  color: var(--uv-white);
+  border: 1px solid var(--uv-gray);
+  border-radius: var(--uv-radius);
+  padding: 0.7rem 1.8rem;
+  transition: border-color var(--uv-transition), color var(--uv-transition);
+}
+
+.btn-uv-outline:hover {
+  border-color: var(--uv-blue-glow);
+  color: var(--uv-blue-glow);
+}
+
+/* ---------- Cards de película ---------- */
+.card-uv {
+  background-color: var(--uv-bg-card);
+  border: 1px solid rgba(184, 193, 209, 0.08);
+  border-radius: var(--uv-radius);
+  overflow: hidden;
+  transition: transform var(--uv-transition), box-shadow var(--uv-transition);
+}
+
+.card-uv:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(47, 111, 237, 0.25);
+}
+
+.card-uv img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.card-uv .card-body {
+  color: var(--uv-white);
+}
+
+.card-uv .card-body small {
+  color: var(--uv-gray);
+}
+
+/* ---------- Secciones de géneros ---------- */
+.section-title {
+  border-left: 4px solid var(--uv-blue);
+  padding-left: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Footer ---------- */
+.footer-uv {
+  background-color: var(--uv-black);
+  color: var(--uv-gray);
+  padding: 2.5rem 1.5rem 1.5rem;
+  border-top: 1px solid rgba(91, 140, 255, 0.15);
+}
+
+.footer-uv a {
+  color: var(--uv-gray);
+}
+
+.footer-uv a:hover {
+  color: var(--uv-blue-glow);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hero-uv {
+    padding: 3.5rem 1rem 2.5rem;
+  }
+}
+
+/* ---------- Accesibilidad: foco visible ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--uv-blue-glow);
+  outline-offset: 2px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-uv::before {
+    animation: none;
+  }
+  .card-uv:hover {
+    transform: none;
+  }
+}
