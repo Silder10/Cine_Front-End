@@ -107,6 +107,12 @@ function pintarPopulares(peliculas) {
   activarBotonesFavorito(contenedor);
 }
 
+/** Calcula la ruta correcta hacia detalle.html según la página actual */
+function rutaDetalle(movieId) {
+  const dentroDePages = window.location.pathname.includes("/pages/");
+  return dentroDePages ? `detalle.html?id=${movieId}` : `pages/detalle.html?id=${movieId}`;
+}
+
 /** Genera el HTML de una card de película (reutilizable en index y cartelera) */
 function tarjetaPeliculaHTML(pelicula) {
   const favMarcado = esFavorito(pelicula.id);
@@ -116,9 +122,13 @@ function tarjetaPeliculaHTML(pelicula) {
         <button class="btn-favorito" data-id="${pelicula.id}" aria-label="Marcar como favorita">
           ${favMarcado ? "❤️" : "🤍"}
         </button>
-        <img src="${getPosterUrl(pelicula.poster_path)}" alt="Póster de ${pelicula.title}" loading="lazy">
+        <a href="${rutaDetalle(pelicula.id)}">
+          <img src="${getPosterUrl(pelicula.poster_path)}" alt="Póster de ${pelicula.title}" loading="lazy">
+        </a>
         <div class="card-body p-3">
-          <h6 class="mb-1">${pelicula.title}</h6>
+          <a href="${rutaDetalle(pelicula.id)}" class="text-white text-decoration-none">
+            <h6 class="mb-1">${pelicula.title}</h6>
+          </a>
           <small>${pelicula.release_date ? pelicula.release_date.split("-")[0] : "—"} · ⭐ ${pelicula.vote_average.toFixed(1)}</small>
         </div>
       </div>

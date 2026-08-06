@@ -84,11 +84,25 @@ function actualizarResumen() {
 /** Carga las películas populares en el <select> de la función */
 async function cargarPeliculasSelect() {
   const select = document.getElementById("selectPelicula");
+  const parametros = new URLSearchParams(window.location.search);
+  const movieIdUrl = parametros.get("movieId");
+
   try {
     const peliculas = await getPopularMovies();
+
+    // Si llega un movieId por URL y no está en la lista de populares, se busca aparte
+    if (movieIdUrl && !peliculas.some((p) => String(p.id) === movieIdUrl)) {
+      const detalle = await getMovieDetail(movieIdUrl);
+      peliculas.unshift(detalle);
+    }
+
     select.innerHTML = peliculas
       .map((p) => `<option value="${p.id}" data-titulo="${p.title}" data-poster="${p.poster_path || ""}">${p.title}</option>`)
       .join("");
+
+    if (movieIdUrl) {
+      select.value = movieIdUrl;
+    }
   } catch (error) {
     select.innerHTML = `<option value="">No se pudo cargar la cartelera</option>`;
   }
